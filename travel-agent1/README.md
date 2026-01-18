@@ -10,10 +10,12 @@ python --version
 # 4. 下载以下依赖
 pip install fastapi uvicorn python-dotenv pydantic-settings langchain>=0.1.0 langchain-openai langchain-community tavily-python
 
-# 5. 创建.env文件，填写 DeepSeek 密钥
+# 5. 创建.env文件，填写 DeepSeek 密钥等
 DEEPSEEK_API_KEY=sk-xxxxxxxxxxxxxxx
 DEEPSEEK_BASE_URL=https://api.deepseek.com
+TAVILY_API_KEY=tvly-xxxxxxx
 
 # 6.启动
 uvicorn app.main:app --reload
+
 
