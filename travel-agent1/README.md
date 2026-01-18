@@ -16,6 +16,7 @@ DEEPSEEK_BASE_URL=https://api.deepseek.com
 TAVILY_API_KEY=tvly-xxxxxxx
 
 # 6.启动
+cd travel-agent1
 uvicorn app.main:app --reload
 
 

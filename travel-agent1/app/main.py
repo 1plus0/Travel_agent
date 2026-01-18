@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html # 导入手动构建文档的方法
 from app.core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
+from app.routers import test, common  # 导入路由模块
 
 # 1. 初始化时禁用默认的 docs_url
 app = FastAPI(
@@ -31,18 +32,8 @@ async def custom_swagger_ui_html():
         swagger_css_url="https://cdn.bootcdn.net/ajax/libs/swagger-ui/5.9.0/swagger-ui.css",
     )
 
-@app.get("/")
-async def root():
-    return {"message": f"欢迎来到 {settings.PROJECT_NAME} 后端接口"}
-
-@app.get("/test-ai")
-async def test_ai():
-    from app.agents.base import get_model
-    llm = get_model()
-    try:
-        response = llm.invoke("你好，请用一句话证明你已经联网了。")
-        return {"status": "success", "ai_response": response.content}
-    except Exception as e:
-        return {"status": "error", "message": str(e)}
+# 3. 注册路由模块
+app.include_router(common.router)  # 通用接口，如根路径 /
+app.include_router(test.router)    # 测试接口，如 /test/ai
 
 
