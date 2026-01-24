@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.openapi.docs import get_swagger_ui_html # 导入手动构建文档的方法
 from app.core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import test, common  # 导入路由模块
+from app.routers import test, common, transport  # 添加 transport 导入
 
 # 1. 初始化时禁用默认的 docs_url
 app = FastAPI(
@@ -35,5 +35,6 @@ async def custom_swagger_ui_html():
 # 3. 注册路由模块
 app.include_router(common.router)  # 通用接口，如根路径 /
 app.include_router(test.router)    # 测试接口，如 /test/ai
+app.include_router(transport.router)  # 交通比价接口，如 /transport/compare
 
 
