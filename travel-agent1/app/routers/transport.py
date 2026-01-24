@@ -40,8 +40,3 @@ async def compare_transport(query: TransportQuery):
         raise HTTPException(status_code=400, detail=f"日期格式错误: {str(e)}")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"查询失败: {str(e)}")
-
-@router.get("/test")
-async def test_transport():
-    """测试交通比价功能"""
-    return {"message": "交通比价模块已就绪", "endpoints": ["/transport/compare"]}

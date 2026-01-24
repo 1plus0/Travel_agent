@@ -3,6 +3,8 @@ from fastapi.openapi.docs import get_swagger_ui_html # 导入手动构建文档�
 from app.core.config import settings
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import test, common, transport  # 添加 transport 导入
+from app.tools.mcp_tools import MCPTransportClient
+from app.tools.variflight_mcp_tools import VariflightMCPClient  # <-- 新增
 
 # 1. 初始化时禁用默认的 docs_url
 app = FastAPI(
@@ -36,5 +38,15 @@ async def custom_swagger_ui_html():
 app.include_router(common.router)  # 通用接口，如根路径 /
 app.include_router(test.router)    # 测试接口，如 /test/ai
 app.include_router(transport.router)  # 交通比价接口，如 /transport/compare
+
+    # @app.get("/debug/mcp/12306/tools")
+    # async def debug_list_12306_tools():
+    #     client = MCPTransportClient()
+    #     return await client.list_tools()
+
+    # @app.get("/debug/mcp/variflight/tools")
+    # async def debug_list_variflight_tools():
+    #     client = VariflightMCPClient()
+    #     return await client.list_tools()
 
 
