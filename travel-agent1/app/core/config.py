@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     DEEPSEEK_API_KEY: str
     DEEPSEEK_BASE_URL: str
     TAVILY_API_KEY: str
+    MCP_12306_REMOTE_URL: str
 
     class Config:
         env_file = ".env"
